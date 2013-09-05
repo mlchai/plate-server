@@ -1,0 +1,13 @@
+
+common: &common
+  adapter: postgresql
+  username: fullscreen
+  password: password
+
+development:
+  <<: *common
+  database: plate_development
+
+test:
+  <<: *common
+  database: plate_test
