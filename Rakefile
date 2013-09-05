@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Plate::Application.load_tasks
+PlateServer::Application.load_tasks
