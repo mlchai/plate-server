@@ -7,6 +7,14 @@ describe PlatesController do
     sign_in user
   end
 
+  describe 'POST /plates/:id/add_problem' do
+    let!(:problem) { FactoryGirl.create :problem }
+    it 'adds problems to plates' do
+      post :add_problem, {:id => plate.id, :problem_id => problem.id}
+      plate.problems.count.should_not == 0
+    end
+  end
+
   describe 'GET /plates' do
     it 'returns all plates' do
       get :index
