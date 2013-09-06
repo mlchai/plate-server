@@ -47,4 +47,13 @@ class PlatesController < ApplicationController
 
     head :no_content
   end
+
+  def add_problem
+    @plate = Plate.find(params[:id])
+    @problem = Problem.find(params[:problem_id])
+
+    @plate.problems << @problem
+
+    head :no_content
+  end
 end
