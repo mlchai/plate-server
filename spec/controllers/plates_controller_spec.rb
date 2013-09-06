@@ -2,14 +2,21 @@ require 'spec_helper'
 
 describe PlatesController do
   let!(:user) { FactoryGirl.create :user }
+  let!(:plate) { FactoryGirl.create :plate }
   before do
     sign_in user
   end
 
   describe 'GET /plates' do
-    it 'returns all plates'
+    it 'returns all plates' do
+      get :index
+      assigns(:plates).should == [plate]
+    end
 
-    it 'accepts params for searching'
+    it 'accepts params for searching' do
+      get :index, {}
+      assigns(:plates).should == [plate]
+    end
   end
 
   describe 'POST /plates' do
@@ -20,7 +27,10 @@ describe PlatesController do
     end
   end
 
-  describe 'PUT /plates/:id' do
-    it 'updates a plate'
+  describe 'PUT /plates/:id' do 
+    it 'updates a plate' do
+      put :update, {:id => plate.id, :plate => {:name => 'changed'}}
+      plate.reload.name.should == 'changed'
+    end
   end
 end

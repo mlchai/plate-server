@@ -7,10 +7,13 @@ describe CommentsController do
     sign_in user
   end
 
-  describe 'GET /Comments' do
-    it 'returns all Comments'
-
-    it 'accepts params for searching'
+  describe 'destroy /comments/:id' do
+    let!(:comment) { FactoryGirl.create :comment }
+    it 'deletes a specified comment' do
+      expect {
+        delete :destroy, {:id => comment.id}
+      }.to change(Comment, :count).by(-1)
+    end
   end
 
   describe 'POST /Comments' do
@@ -19,6 +22,7 @@ describe CommentsController do
         :commentable_type => problem.class}}
       json = JSON.parse response.body
       json['id'].should_not be_nil
+      problem.comments.count.should_not == 0
     end
   end
 
