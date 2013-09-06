@@ -1,7 +1,7 @@
 class CreateProblems < ActiveRecord::Migration
   def change
     create_table :problems do |t|
-      t.integer :plate_id
+      t.references :user_id
       t.string :name
       t.text :description
 
