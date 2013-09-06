@@ -16,12 +16,11 @@ describe PlatesController do
     it 'creates a plate with the given params' do
       post :create, {:plate => {:name => 'hello', :description => 'hello'}}
       json = JSON.parse response.body
-      puts json
       json['id'].should_not be_nil
     end
   end
 
   describe 'PUT /plates/:id' do
-    
+    it 'updates a plate'
   end
 end
