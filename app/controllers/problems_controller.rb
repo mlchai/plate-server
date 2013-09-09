@@ -2,7 +2,11 @@ class ProblemsController < ApplicationController
   # GET /problems
   # GET /problems.json
   def index
-    @problems = Problem.all
+    if params[:plate_id]
+      @problems = Plate.find(params[:plate_id]).problems
+    else
+      @problems = Problem.all
+    end
 
     render json: @problems
   end
